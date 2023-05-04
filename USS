@@ -1,0 +1,29 @@
+const int sigPin = 13;
+long duration;
+int distance;
+void setup()
+{
+  pinMode(LED_BUILTIN, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  digitalWrite(sigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(sigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(sigPin,LOW);
+  
+  pinMode(sigPin, INPUT);
+  duration = pulseIn(sigPin, HIGH);
+  pinMode(sigPin, OUTPUT);
+  
+  distance = duration * 0.034 / 2;
+  
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.println("cm");
+  
+  delay(500);
+}
